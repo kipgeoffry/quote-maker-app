@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22"
+  },
+  "name": "quote-maker-app",
+  "version": "1.0.0",
+  "description": "This is a simple express app that lets you enter a quote, save it, and view it on a customizable web page",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "group1Project",
+  "license": "ISC"
+}
