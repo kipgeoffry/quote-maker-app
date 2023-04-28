@@ -3,7 +3,7 @@
 QuoteMaker App is a web-based application that allows users to store and display their favorite quotes. It provides a simple and intuitive interface for entering quotes and a customizable web page for displaying them.
 
 ## Live Link
-[Check it out](https://github.com/kipgeoffry/quote-maker-app.git)
+[Check it out](https://quote-maker-app.onrender.com)
 ​
 ## Features
 - Add quotes with ease
@@ -19,7 +19,7 @@ To view your saved quotes, navigate to the "Quotes" page. Here, you can see all 
 To customize the look and feel of the quotes page, navigate to the "Settings" page. Here, you can change the font, colors, and other design elements of the page.
 ​
  ## Instalation
- 1. git clone https://github.com/kipgeoffry/delani-studio.git 
+ 1. git clone https://github.com/kipgeoffry/quote-maker-app
  2. Run `npm install` to install all the required dependencies.
  4. Run `npm start` to start the server.
  5. Open your browser and navigate to `http://localhost:4500` to access the application
