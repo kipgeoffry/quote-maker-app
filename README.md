@@ -3,7 +3,7 @@
 QuoteMaker App is a web-based application that allows users to store and display their favorite quotes. It provides a simple and intuitive interface for entering quotes and a customizable web page for displaying them.
 
 ## Live Link
-[Check it out](https://kipgeoffry.github.io/delani-studio/.)
+[Check it out](https://github.com/kipgeoffry/quote-maker-app.git)
 ​
 ## Features
 - Add quotes with ease
@@ -32,7 +32,7 @@ To customize the look and feel of the quotes page, navigate to the "Settings" pa
  * Express.js
 ​​
 ## License
-> This project is licensed under the MIT License - see the LICENSE.md file for details.
+> This project is licensed under the MIT License - see the `LICENSE` file for details.
 ​
 ## Contributors
 - kipgeoffry [kipgeoffry@gmail.com]
