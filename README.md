@@ -1,8 +1,8 @@
 # Quote Maker APP
- # Overview
+ ## Overview
 QuoteMaker App is a web-based application that allows users to store and display their favorite quotes. It provides a simple and intuitive interface for entering quotes and a customizable web page for displaying them.
 
-# Live Link
+## Live Link
 [Check it out](https://kipgeoffry.github.io/delani-studio/.)
 ​
 ## Features
