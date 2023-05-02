@@ -20,13 +20,13 @@
             <div class="col-2"></div>
             <div class="col-8 pt-3">
                 <div class="mb-3">
-                    <form  class= from-control action="/update" method="GET">
-                    <label for="uName" class="form-label">Your Name:</label>
-                    <input type="text" class="form-control" id="uname" placeholder="Enter your name">
+                    <form  class= from-control action="/update" method="post">
+                    <label for="uname" class="form-label">Your Name:</label>
+                    <input type="text" class="form-control" id="uname" name="uname" placeholder="Enter your name">
                   </div>
                   <div class="mb-3">
                     <label for="quote" class="form-label">Enter your Quote:</label>
-                    <textarea class="form-control" id="quote" rows="3" placeholder="Your quote"></textarea>
+                    <textarea class="form-control" id="quote" rows="3" name="quote" placeholder="Your quote"></textarea>
                   </div>
             
                   <div class="d-grid gap-2 d-md-block">

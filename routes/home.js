@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 
 const hrouter = express.Router(); 
 
@@ -9,7 +10,15 @@ hrouter.get("/",(req,res)=>{
 hrouter.post("/update",(req,res)=>{
     // res.send("updated successfully")
     console.log("request received")
-    // console.log(req)
+    let uname = req.body.uname;
+    let quote = req.body.quote;
+    const fileName = path.join(process.cwd(),"public","quotes.txt");
+    const updateDoc = (fileName,quote)=>{
+        fs.appendFile(fileName,quote,(error)=>{
+            if (error) throw console.log(`${error} + Something happened when updating the file`)
+            else console.log("quote added");
+        })
+    };
 
 });
 
