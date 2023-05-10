@@ -8,19 +8,22 @@ hrouter.get("/",(req,res)=>{
     res.render('index',{});
 });
 hrouter.post("/update",(req,res)=>{
-    // res.send("updated successfully")
+    res.status("200").json({"status":"receiced"})
     console.log("request received")
-    let uname = req.body.uname;
-    let quote = req.body.quote;
+    // const {uname,quote} = req.body;
+    // console.log(uname);
+    // console.log(quote);
+    console.log(req.body);
+
     const fileName = path.join(process.cwd(),"public","quotes.txt");
-    const updateDoc = (fileName,quote)=>{
-        fs.appendFile(fileName,quote,(error)=>{
-            if (error) throw console.log(`${error} + Something happened when updating the file`)
-            else console.log("quote added");
-        })
-    };
+    // const updateDoc = (fileName,quote)=>{
+    //     fs.appendFile(fileName,quote,(error)=>{
+    //         if (error) throw console.log(`${error} + Something happened when updating the file`)
+    //         else console.log("quote added");
+    //     })
+    // };
 
 });
 
-exports.hrouter = hrouter; //another way of exporting modules
-// module.exports = router
+// exports.hrouter = hrouter; //another way of exporting modules
+module.exports = hrouter
