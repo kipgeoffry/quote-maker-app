@@ -39,7 +39,7 @@ const stores = [
     // add more stores as needed
   ];
 
-//this code filters stores based on ratings it is using query parameter//use filter method
+//this code filters stores based on ratings it is using query parameter(rating)//use filter method
 router.get("/",(req,res)=>{
     const {rating} = req.query;
     const parsedRating = parseInt(rating);

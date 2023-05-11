@@ -21,11 +21,14 @@ const family = [{
 }
 ];
 
+router.get("/",(req,res)=>{
+    res.json(family);
+})
+
 router.get("/:name", (req, res) => {
-    console.log(req.params);
-    let {name} = req.params
+    let {name} = req.params;
     const personFamily = family.find((fam)=>fam.name == name );
-    res.json(personFamily);
+    res.send(personFamily);
 
 });
 
