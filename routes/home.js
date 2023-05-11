@@ -1,26 +1,48 @@
-const express = require("express");
+const { json } = require("body-parser");
+const { Router } = require("express");
+const { link } = require("fs");
 const path = require("path");
 
-const hrouter = express.Router(); 
+const hrouter = Router();
 
-hrouter.get("/",(req,res)=>{
+hrouter.get("/", (req, res) => {
     // res.send("Access to this page is successful");
-    res.render('index',{});
+    res.render('index', {});
 });
-hrouter.post("/update",(req,res)=>{
-    // res.send("updated successfully")
-    console.log("request received")
-    let uname = req.body.uname;
-    let quote = req.body.quote;
-    const fileName = path.join(process.cwd(),"public","quotes.txt");
-    const updateDoc = (fileName,quote)=>{
-        fs.appendFile(fileName,quote,(error)=>{
-            if (error) throw console.log(`${error} + Something happened when updating the file`)
-            else console.log("quote added");
-        })
+
+const links = {
+    "status": "Active",
+    "ips": [
+        {
+            "Address": "197.248.209.239",
+            "Mask": "255.255.255.255"
+        },
+        {
+            "Address": "41.215.10.0",
+            "Mask": "255.255.255.252"
+
+        }
+    ],
+    "ci": "95014729",
+    "capacity": "IFB 5Mbps"
+};
+
+hrouter.get("/links/:value",(req,res)=>{
+    const {value} = req.params 
+    console.log(value);
+
+    const lin = {
+        status: "Active",
+        ips:[{
+            Address:"197.248.10.10",
+            Mask:"255.255.255.255"
+        }]        
     };
 
-});
+    console.log(lin)
+    res.send(lin);
 
-exports.hrouter = hrouter; //another way of exporting modules
-// module.exports = router
+})
+
+// exports.hrouter = hrouter; //another way of exporting modules
+module.exports = hrouter
