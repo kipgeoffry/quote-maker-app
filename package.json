@@ -15,5 +15,8 @@
     "start": "nodemon app.js"
   },
   "author": "group1Project",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "dotenv": "^16.0.3"
+  }
 }

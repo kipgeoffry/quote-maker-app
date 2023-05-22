@@ -1,5 +1,6 @@
 const express = require("express");
-require("./database/db") //import db
+require("./database/db"); //import db
+
 // const {hrouter} = require("./routes/home"); //same as import router from "./routes/home"
 const homeUrl = require("./routes/home");
 const storeRoute = require("./routes/stores");
