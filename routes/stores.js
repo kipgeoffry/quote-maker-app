@@ -63,5 +63,10 @@ router.post("/",(req,res)=>{
     res.send("store added successfully")
 });
 
-module.exports = router;
+router.get("/login",(req,res)=>{
+    res.cookie()
 
+});
+
+
+module.exports = router;
