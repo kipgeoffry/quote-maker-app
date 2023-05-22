@@ -1,26 +1,34 @@
-const express = require("express");
-const path = require("path");
+const { json } = require("body-parser");
+const { Router } = require("express");
+const quotemodel = require("../database/schemas/quotes")
 
-const hrouter = express.Router(); 
+const router = Router();
 
-hrouter.get("/",(req,res)=>{
+
+
+router.get("/", (req, res) => {
     // res.send("Access to this page is successful");
-    res.render('index',{});
+    res.render('index', {});
 });
-hrouter.post("/update",(req,res)=>{
-    // res.send("updated successfully")
-    console.log("request received")
-    let uname = req.body.uname;
-    let quote = req.body.quote;
-    const fileName = path.join(process.cwd(),"public","quotes.txt");
-    const updateDoc = (fileName,quote)=>{
-        fs.appendFile(fileName,quote,(error)=>{
-            if (error) throw console.log(`${error} + Something happened when updating the file`)
-            else console.log("quote added");
-        })
-    };
+
+router.get("/quotes",  async (req,res)=>{
+   const myquotes = await quotemodel.find();
+   res.send(myquotes);
+})
+router.post("/quotes", async (req,res)=>{
+    try{
+        const { author, quote} = req.body;
+        const newQuote = await quotemodel.create({author,quote});
+        res.send("quote added successfully");
+    }
+    catch(err){
+        console.log(err)
+    }; 
 
 });
 
-exports.hrouter = hrouter; //another way of exporting modules
-// module.exports = router
+
+
+
+// exports.hrouter = hrouter; //another way of exporting modules
+module.exports = router
