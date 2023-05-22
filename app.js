@@ -1,12 +1,13 @@
 const express = require("express");
+require("./database/db") //import db
 // const {hrouter} = require("./routes/home"); //same as import router from "./routes/home"
 const homeUrl = require("./routes/home");
 const storeRoute = require("./routes/stores");
 const familyRoute = require("./routes/family");
 // const bodyParser = require('body-parser')
-const port = 4500;
 
 const app = express();
+const port = 4500;
 
 // app.set('PORT',4500);
 app.use(express.urlencoded({ extended: false }));
