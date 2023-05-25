@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const quotemodel = require("../database/schemas/quotes")
+const Quotes = require("../database/schemas/quotes")
 
 //initialize the router object
 const router = Router();
@@ -10,22 +10,27 @@ router.get("/", (req, res) => {
 
 //ROUTES
 //get all quotes
-router.get("/quotes",  async (req,res)=>{
-   const myquotes = await quotemodel.find();
-   res.send(myquotes);
+router.get("/quotes", async (req,res)=>{
+    try {
+        const myquotes = await quotemodel.find();
+        res.send(myquotes);
+    } catch (error) {
+        console.error({message:error});
+    }  
+   
 });
 
 //add a quote
-router.post("/quotes", async (req,res)=>{
+router.post("/quotes",async (req,res)=>{
     try{
         const { author, quote} = req.body;
-        const newQuote = await quotemodel.create({author,quote});
-        //you can also use
+        const newQuote = await Quotes.create({author,quote});
+        //you can also use below to save a quote to DB
         // const newQuot = new Quotes({
         //     quote:req.body.quote,
         //     author:req.body.author
         // });
-        // newQuot.save();
+        // await newQuot.save();
         res.send("quote added successfully");
     }
     catch(err){

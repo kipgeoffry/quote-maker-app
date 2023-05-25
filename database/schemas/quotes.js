@@ -4,19 +4,19 @@ const mongoose = require("mongoose");
 
 const schema = {
     author:{
-        type:mongoose.SchemaTypes.String,
+        type:String,
     },
     quote:{
-        type:mongoose.SchemaTypes.String,
+        type:String,
         require:true,
     },
     createdOn:{
-        type:mongoose.SchemaTypes.Date,
+        type:Date,
         require:true,
-        default:new Date(),
+        default:Date.now, //new Date() can also be used
     },
 };
 
 const quotesSchema = new mongoose.Schema(schema);
 
-module.exports = mongoose.model('Quotes',quotesSchema); //compiling our schema into a Model called quotes
+module.exports = mongoose.model('Quotes',quotesSchema); //compiling our schema into a Model called Quotes this also maps to collection called quote
