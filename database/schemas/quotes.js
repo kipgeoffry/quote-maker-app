@@ -2,7 +2,7 @@ const { Mongoose, mongo } = require("mongoose");
 
 const mongoose = require("mongoose");
 
-const quotesSchema = new mongoose.Schema({
+const schema = {
     author:{
         type:mongoose.SchemaTypes.String,
     },
@@ -15,6 +15,8 @@ const quotesSchema = new mongoose.Schema({
         require:true,
         default:new Date(),
     },
-});
+};
 
-module.exports = mongoose.model('quotes',quotesSchema); //compiling our schema into a Model called quotes
+const quotesSchema = new mongoose.Schema(schema);
+
+module.exports = mongoose.model('Quotes',quotesSchema); //compiling our schema into a Model called quotes
