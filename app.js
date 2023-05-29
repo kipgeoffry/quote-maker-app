@@ -1,24 +1,24 @@
 const express = require("express");
 require("./database/db"); //import db
 
-// const {hrouter} = require("./routes/home"); //same as import router from "./routes/home"
+//url routes
 const homeUrl = require("./routes/home");
 const storeRoute = require("./routes/stores");
 const familyRoute = require("./routes/family");
-// const bodyParser = require('body-parser')
 
+//initializing express app
 const app = express();
-const port = 4500;
+const port = process.env.PORT || 4500;
 
-// app.set('PORT',4500);
+//application midlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json()); //middleware to parse json before handlers.
 app.use(checkUrl);//middleware that will console log the method and url that is accesses
-app.use(homeUrl); //middleware that routes request with url "/" to the logic that handles it
+app.use("/api/v1/quote/",homeUrl); //middleware that routes request with url "/" to the logic that handles it
 app.use("/api/v1/stores",storeRoute); //url route to stores 
 app.use("/family",familyRoute); //url route for family
 
-
+//setting the templating engine used to render files
 app.set('view engine', 'ejs');
 
 function checkUrl(req,res,next){
