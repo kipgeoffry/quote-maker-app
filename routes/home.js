@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const Quotes = require("../database/schemas/quotes")
+const { findAuthor,findQuoteById } = require("../controllers/quotes")
 
 //initialize the router object
 const router = Router();
@@ -81,36 +82,6 @@ router.delete("/:id",findQuoteById,async(req,res)=>{
 })
 
 //like a quote
-
-//function to find by author
-
-async function findAuthor(req,res,next){
-    const { id } = req.params;
-    let author = null;
-    try {
-    author = await Quotes.find({author:id});
-    if (author == null) return res.status(404).json({message:`No quotes by author ${id} found`})
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({message:error.message});        
-    }
-    res.author = author;
-    next()
-    };
-
-async function findQuoteById(req,res,next){
-    const { id } = req.params;
-    let quote = null;
-    try {
-        quote = await Quotes.findById(id);
-        if (quote == null) return res.status(404).json({message:`No quote by id ${id}`});       
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({message:error});        
-    }    
-    res.quote = quote;
-    next();
-}
-    
+ 
 
 module.exports = router
