@@ -46,7 +46,7 @@ router.get("/quote/:id",async (req,res)=>{
     console.log(id);
     try {
         const quote = await Quotes.find({author:id});
-        if (!quote) return res.status(404).send(`No quotes by author ${id} found`);
+        // if (!quote) return res.status(404).send(`No quotes by author ${id} found`);
         console.log(quote);
         res.status(200).send(quote);       
     } catch (error) {
@@ -57,8 +57,25 @@ router.get("/quote/:id",async (req,res)=>{
 
 //update quote
 
+
+
 //delete quote
 
 //like a quote
+
+//function to find author
+
+async function findAuthor(req,res,next){
+    let author = null;
+    try {
+    author = await Quotes.find({author:req.params});
+    if (author == null) return res.status(404).json({message:`No quotes by author ${id} found`})
+    } catch (error) {
+        return res.status(500).json({message:error.message});        
+    }
+    res.author = author;
+    next()
+    };
+    
 
 module.exports = router
