@@ -41,7 +41,7 @@ router.post("/quote",async (req,res)=>{
 
 //get a quote by author
 
-router.get("/quote/:id",findAuthor,async (req,res)=>{
+router.get("/quote/author/:id",findAuthor,(req,res)=>{
     console.log(res.author);
     res.json(res.author);
 
@@ -49,27 +49,44 @@ router.get("/quote/:id",findAuthor,async (req,res)=>{
 
 //get a quote by id
 
-router.get("/quote/id/:id",async (req,res)=>{
-    const { id } = req.params;
-    try {
-        const quote = await Quotes.findById(id);
-        console.log(quote)
-        if (quote == null) return res.status(400).json({message:`No quote by id ${id}`});
-        res.status(200).send(quote);        
-    } catch (error) {
-        res.status(500).json({message:error.message});        
-    }    
+router.get("/quote/:id",findQuoteById, (req,res)=>{
+    console.log(res.quote)
+    res.send(res.quote)
+    
 });
 
 //update quote
-
-
-
+router.patch("/quote/:id",findQuoteById,async(req,res)=>{
+    const { author, quote } = req.body;
+    if (author != null){
+        res.quote.author = author;
+    }
+    if (quote != null){
+        res.quote.quote = quote;
+    }
+    try {
+        const updatedQuote = await res.quote.save();
+        res.send("record updated successfully")
+        
+    } catch (error) {
+        res.status(400).json({message:error})
+    }
+});
 //delete quote
+router.delete("/quote/:id",findQuoteById,async(req,res)=>{
+    const{ id } = res.quote
+    try {
+        await Quotes.deleteOne({_id:id}) 
+        res.json({message:`quote deleted`})      
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message:error});        
+    }
+})
 
 //like a quote
 
-//function to find author
+//function to find by author
 
 async function findAuthor(req,res,next){
     const { id } = req.params;
@@ -84,6 +101,21 @@ async function findAuthor(req,res,next){
     res.author = author;
     next()
     };
+
+async function findQuoteById(req,res,next){
+    const { id } = req.params;
+    let quote = null;
+    try {
+        quote = await Quotes.findById(id);
+        if (quote == null) return res.status(404).json({message:`No quote by id ${id}`});
+        // return res.status(200).send(quote);        
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({message:error});        
+    }    
+    res.quote = quote;
+    next();
+}
     
 
 module.exports = router
