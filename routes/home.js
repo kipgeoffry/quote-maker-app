@@ -41,18 +41,24 @@ router.post("/quote",async (req,res)=>{
 
 //get a quote by author
 
-router.get("/quote/:id",async (req,res)=>{
+router.get("/quote/:id",findAuthor,async (req,res)=>{
+    console.log(res.author);
+    res.json(res.author);
+
+});
+
+//get a quote by id
+
+router.get("/quote/id/:id",async (req,res)=>{
     const { id } = req.params;
-    console.log(id);
     try {
-        const quote = await Quotes.find({author:id});
-        // if (!quote) return res.status(404).send(`No quotes by author ${id} found`);
-        console.log(quote);
-        res.status(200).send(quote);       
+        const quote = await Quotes.findById(id);
+        console.log(quote)
+        if (quote == null) return res.status(400).json({message:`No quote by id ${id}`});
+        res.status(200).send(quote);        
     } catch (error) {
-        console.log(error);
-        res.status(400).json({message:error});
-    }
+        res.status(500).json({message:error.message});        
+    }    
 });
 
 //update quote
@@ -66,11 +72,13 @@ router.get("/quote/:id",async (req,res)=>{
 //function to find author
 
 async function findAuthor(req,res,next){
+    const { id } = req.params;
     let author = null;
     try {
-    author = await Quotes.find({author:req.params});
+    author = await Quotes.find({author:id});
     if (author == null) return res.status(404).json({message:`No quotes by author ${id} found`})
     } catch (error) {
+        console.log(error)
         return res.status(500).json({message:error.message});        
     }
     res.author = author;
