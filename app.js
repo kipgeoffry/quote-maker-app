@@ -14,7 +14,7 @@ const port = process.env.PORT || 4500;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json()); //middleware to parse json before handlers.
 app.use(checkUrl);//middleware that will console log the method and url that is accesses
-app.use(homeUrl); //middleware that routes request with url "/" to the logic that handles it
+app.use("/api/v1/quote/",homeUrl); //middleware that routes request with url "/" to the logic that handles it
 app.use("/api/v1/stores",storeRoute); //url route to stores 
 app.use("/family",familyRoute); //url route for family
 

@@ -21,7 +21,7 @@ router.get("/quotes", async (req,res)=>{
 });
 
 //add a quote
-router.post("/quote",async (req,res)=>{
+router.post("/",async (req,res)=>{
     try{
         const { author, quote} = req.body;
         const newQuote = await Quotes.create({author,quote});
@@ -34,29 +34,27 @@ router.post("/quote",async (req,res)=>{
         res.send("quote added successfully");
     }
     catch(err){
-        console.log(err)
+        console.log(err);
     }; 
 
 });
 
 //get a quote by author
 
-router.get("/quote/author/:id",findAuthor,(req,res)=>{
-    console.log(res.author);
+router.get("/author/:id",findAuthor,(req,res)=>{
     res.json(res.author);
 
 });
 
 //get a quote by id
 
-router.get("/quote/:id",findQuoteById, (req,res)=>{
-    console.log(res.quote)
-    res.send(res.quote)
+router.get("/:id",findQuoteById, (req,res)=>{
+    res.send(res.quote);
     
 });
 
 //update quote
-router.patch("/quote/:id",findQuoteById,async(req,res)=>{
+router.patch("/:id",findQuoteById,async(req,res)=>{
     const { author, quote } = req.body;
     if (author != null){
         res.quote.author = author;
@@ -66,20 +64,18 @@ router.patch("/quote/:id",findQuoteById,async(req,res)=>{
     }
     try {
         const updatedQuote = await res.quote.save();
-        res.send("record updated successfully")
-        
+        res.send("record updated successfully");  
     } catch (error) {
-        res.status(400).json({message:error})
+        res.status(400).json({message:error});
     }
 });
 //delete quote
-router.delete("/quote/:id",findQuoteById,async(req,res)=>{
+router.delete("/:id",findQuoteById,async(req,res)=>{
     const{ id } = res.quote
     try {
         await Quotes.deleteOne({_id:id}) 
         res.json({message:`quote deleted`})      
     } catch (error) {
-        console.log(error)
         res.status(500).json({message:error});        
     }
 })
@@ -107,8 +103,7 @@ async function findQuoteById(req,res,next){
     let quote = null;
     try {
         quote = await Quotes.findById(id);
-        if (quote == null) return res.status(404).json({message:`No quote by id ${id}`});
-        // return res.status(200).send(quote);        
+        if (quote == null) return res.status(404).json({message:`No quote by id ${id}`});       
     } catch (error) {
         console.log(error)
         return res.status(500).json({message:error});        
