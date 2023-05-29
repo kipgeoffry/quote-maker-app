@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
 //get all quotes
 router.get("/quotes", async (req,res)=>{
     try {
-        const myquotes = await quotemodel.find();
+        const myquotes = await Quotes.find();
         res.send(myquotes);
     } catch (error) {
         console.error({message:error});
@@ -21,7 +21,7 @@ router.get("/quotes", async (req,res)=>{
 });
 
 //add a quote
-router.post("/quotes",async (req,res)=>{
+router.post("/quote",async (req,res)=>{
     try{
         const { author, quote} = req.body;
         const newQuote = await Quotes.create({author,quote});
@@ -40,6 +40,20 @@ router.post("/quotes",async (req,res)=>{
 });
 
 //get a quote by author
+
+router.get("/quote/:id",async (req,res)=>{
+    const { id } = req.params;
+    console.log(id);
+    try {
+        const quote = await Quotes.find({author:id});
+        if (!quote) return res.status(404).send(`No quotes by author ${id} found`);
+        console.log(quote);
+        res.status(200).send(quote);       
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({message:error});
+    }
+});
 
 //update quote
 
